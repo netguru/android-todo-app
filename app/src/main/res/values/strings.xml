@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">To Do List</string>
+    <string name="ending_tasks">Ending tasks</string>
+    <string name="to_do_tasks">To do</string>
+    <string name="done_tasks">Done</string>
+    <string name="add_task_activity">Add task</string>
+    <string name="menu_accept">Accept</string>
+    <string name="task_title">Task title</string>
+    <string name="task_description">Description</string>
+    <string name="task_due_date">Due date</string>
+    <string name="checklist">Checklist</string>
+    <string name="add_checklist_item_button_text">Add list item</string>
+    <string name="checklist_item_hint">What you need to do...</string>
+</resources>

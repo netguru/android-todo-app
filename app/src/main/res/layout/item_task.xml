@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="@dimen/form_image_width"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:src="@drawable/ic_title_white_24dp"
+                android:tint="@color/form_icon_color"/>
+
+            <TextView
+                android:id="@+id/title_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="@dimen/form_image_width"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:src="@drawable/ic_description_white_24dp"
+                android:tint="@color/form_icon_color"/>
+
+            <TextView
+                android:id="@+id/description_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="@dimen/form_image_width"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:src="@drawable/ic_access_time_white_24dp"
+                android:tint="@color/form_icon_color"/>
+
+            <TextView
+                android:id="@+id/due_date_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
