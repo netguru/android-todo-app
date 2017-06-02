@@ -12,8 +12,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import co.netguru.todolist.R;
 import co.netguru.todolist.app.App;
-import co.netguru.todolist.ui.edittask.EditTaskActivity;
 import co.netguru.todolist.ui.base.BaseMvpActivity;
+import co.netguru.todolist.ui.edittask.EditTaskActivity;
 import co.netguru.todolist.ui.tasks.TasksFragment;
 import co.netguru.todolist.ui.tasks.TasksType;
 

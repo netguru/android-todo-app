@@ -16,9 +16,9 @@ import co.netguru.todolist.R;
 import co.netguru.todolist.app.App;
 import co.netguru.todolist.domain.model.ChecklistItem;
 import co.netguru.todolist.domain.model.Task;
+import co.netguru.todolist.ui.base.BaseMvpFragment;
 import co.netguru.todolist.ui.edittask.adapter.CheckListAdapter;
 import co.netguru.todolist.ui.edittask.adapter.DueDateRequestListener;
-import co.netguru.todolist.ui.base.BaseMvpFragment;
 
 public class EditTaskFragment extends BaseMvpFragment<EditTaskPresenter>
         implements EditTaskView, DatePickerDialog.OnDateSetListener, DueDateRequestListener {

@@ -3,7 +3,7 @@ package co.netguru.todolist.app;
 import javax.inject.Singleton;
 
 import co.netguru.todolist.data.local.LocalDataModule;
-import co.netguru.todolist.ui.edittask.AddTaskFragmentComponent;
+import co.netguru.todolist.ui.edittask.EditTaskFragmentComponent;
 import co.netguru.todolist.ui.main.MainActivityComponent;
 import co.netguru.todolist.ui.tasks.TasksFragmentComponent;
 import dagger.Component;
@@ -19,5 +19,5 @@ public interface ApplicationComponent {
 
     TasksFragmentComponent tasksFragmentComponent();
 
-    AddTaskFragmentComponent addTaskFragmentComponent();
+    EditTaskFragmentComponent addTaskFragmentComponent();
 }

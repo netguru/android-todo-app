@@ -5,7 +5,7 @@ import dagger.Subcomponent;
 
 @FragmentScope
 @Subcomponent
-public interface AddTaskFragmentComponent {
+public interface EditTaskFragmentComponent {
 
     void inject(EditTaskFragment addTaskFragment);
 
