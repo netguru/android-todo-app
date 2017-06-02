@@ -18,54 +18,30 @@ import android.arch.persistence.room.PrimaryKey;
         ))
 public class ChecklistItemDb {
 
-    @PrimaryKey
-    private int id;
+    @PrimaryKey(autoGenerate = true)
+    private long id;
 
     @ColumnInfo(name = "task_id")
-    private int taskId;
+    private final long taskId;
 
     @ColumnInfo(name = "first_name")
-    private String name;
+    private final String name;
 
-    @ColumnInfo(name = "is_done")
-    private boolean isDone;
-
-    public ChecklistItemDb(int id, int taskId, String name, boolean isDone) {
+    public ChecklistItemDb(long id, long taskId, String name) {
         this.id = id;
         this.taskId = taskId;
         this.name = name;
-        this.isDone = isDone;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getTaskId() {
+    public long getTaskId() {
         return taskId;
-    }
-
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isDone() {
-        return isDone;
-    }
-
-    public void setDone(boolean done) {
-        isDone = done;
     }
 }

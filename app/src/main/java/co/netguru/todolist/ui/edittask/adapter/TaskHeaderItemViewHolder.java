@@ -1,4 +1,4 @@
-package co.netguru.todolist.ui.addtask.adapter;
+package co.netguru.todolist.ui.edittask.adapter;
 
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -13,10 +13,10 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import co.netguru.todolist.R;
 import co.netguru.todolist.common.LocalDateFormatterUtil;
-import co.netguru.todolist.domain.Task;
+import co.netguru.todolist.ui.edittask.adapter.model.TaskDataCollector;
 import co.netguru.todolist.ui.base.BaseViewHolder;
 
-public class TaskHeaderItemViewHolder extends BaseViewHolder<Task> {
+public class TaskHeaderItemViewHolder extends BaseViewHolder<TaskDataCollector> {
 
     @BindView(R.id.title_edit_text) TextInputEditText titleEditText;
     @BindView(R.id.description_edit_text) TextInputEditText descriptionEditText;
@@ -25,9 +25,9 @@ public class TaskHeaderItemViewHolder extends BaseViewHolder<Task> {
     private final DueDateRequestListener dueDateRequestListener;
 
     @Nullable
-    private Task currentTask;
+    private TaskDataCollector currentTask;
 
-    public TaskHeaderItemViewHolder(ViewGroup parent, DueDateRequestListener dueDateRequestListener) {
+    TaskHeaderItemViewHolder(ViewGroup parent, DueDateRequestListener dueDateRequestListener) {
         super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_task_description, parent, false));
         this.dueDateRequestListener = dueDateRequestListener;
 
@@ -39,7 +39,7 @@ public class TaskHeaderItemViewHolder extends BaseViewHolder<Task> {
     }
 
     @Override
-    public void bind(Task item) {
+    public void bind(TaskDataCollector item) {
         currentTask = item;
         titleEditText.setText(item.getTitle());
         descriptionEditText.setText(item.getDescription());

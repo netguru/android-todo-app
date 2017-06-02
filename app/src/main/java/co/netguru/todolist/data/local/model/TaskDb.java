@@ -11,11 +11,11 @@ import org.threeten.bp.LocalDate;
 public class TaskDb {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private final long id;
 
-    private String title;
+    private final String title;
 
-    private String description;
+    private final String description;
 
     @ColumnInfo(name = "is_done")
     private boolean isDone;
@@ -24,7 +24,7 @@ public class TaskDb {
     @ColumnInfo(name = "due_date")
     private LocalDate dueDate;
 
-    public TaskDb(int id, String title, String description, boolean isDone, LocalDate dueDate) {
+    public TaskDb(long id, String title, String description, boolean isDone, LocalDate dueDate) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -32,44 +32,24 @@ public class TaskDb {
         this.dueDate = dueDate;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public boolean isDone() {
         return isDone;
     }
 
-    public void setDone(boolean done) {
-        isDone = done;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     @Nullable
     public LocalDate getDueDate() {
         return dueDate;
-    }
-
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
     }
 }

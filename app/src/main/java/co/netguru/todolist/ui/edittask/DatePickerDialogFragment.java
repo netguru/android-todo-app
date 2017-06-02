@@ -1,4 +1,4 @@
-package co.netguru.todolist.ui.addtask;
+package co.netguru.todolist.ui.edittask;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

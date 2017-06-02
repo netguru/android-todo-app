@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.netguru.todolist.data.local.model.ChecklistItemDb;
-import co.netguru.todolist.domain.ChecklistItem;
+import co.netguru.todolist.domain.model.ChecklistItem;
 
 public class ChecklistItemMapper {
 
@@ -12,11 +12,11 @@ public class ChecklistItemMapper {
         throw new AssertionError();
     }
 
-    public static ChecklistItemDb toChecklistItemDb(int taskId, ChecklistItem checklistItem) {
-        return new ChecklistItemDb(checklistItem.getId(), taskId, checklistItem.getName(), checklistItem.isDone());
+    public static ChecklistItemDb toChecklistItemDb(long taskId, ChecklistItem checklistItem) {
+        return new ChecklistItemDb(checklistItem.getId(), taskId, checklistItem.getName());
     }
 
-    public static List<ChecklistItemDb> toChecklistItemDbList(int taskId, List<ChecklistItem> checklistItems) {
+    public static List<ChecklistItemDb> toChecklistItemDbList(long taskId, List<ChecklistItem> checklistItems) {
         List<ChecklistItemDb> checklistItemDbList = new ArrayList<>(checklistItems.size());
 
         for (ChecklistItem checklistItem : checklistItems) {
@@ -27,7 +27,10 @@ public class ChecklistItemMapper {
     }
 
     public static ChecklistItem toChecklistItem(ChecklistItemDb checklistItemDb) {
-        return new ChecklistItem(checklistItemDb.getId(), checklistItemDb.getName(), checklistItemDb.isDone());
+        return new ChecklistItem.Builder()
+                .setId(checklistItemDb.getId())
+                .setName(checklistItemDb.getName())
+                .build();
     }
 
     public static List<ChecklistItem> toChecklistItemList(List<ChecklistItemDb> checklistItemDbs) {

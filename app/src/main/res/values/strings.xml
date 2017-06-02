@@ -10,5 +10,8 @@
     <string name="task_due_date">Due date</string>
     <string name="checklist">Checklist</string>
     <string name="add_checklist_item_button_text">Add list item</string>
-    <string name="checklist_item_hint">What you need to do...</string>
+    <string name="checklist_item_hint">What you need to do…</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_delete">Delete</string>
+    <string name="no_tasks_message">No tasks here yet…</string>
 </resources>

@@ -8,8 +8,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import co.netguru.todolist.common.RxTransformers;
-import co.netguru.todolist.data.local.TasksRepository;
-import co.netguru.todolist.data.local.model.TaskDb;
+import co.netguru.todolist.domain.TaskController;
+import co.netguru.todolist.domain.model.Task;
 import co.netguru.todolist.ui.base.BasePresenter;
 import io.reactivex.Flowable;
 import io.reactivex.disposables.Disposable;
@@ -19,7 +19,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
 
     private static final int FINISHING_TASKS_PERIOD = 7;
 
-    private final TasksRepository tasksRepository;
+    private final TaskController taskController;
     private TasksType taskType;
     private Disposable tasksDisposable;
 
@@ -32,8 +32,8 @@ public class TasksPresenter extends BasePresenter<TasksView> {
     }
 
     @Inject
-    public TasksPresenter(TasksRepository tasksRepository) {
-        this.tasksRepository = tasksRepository;
+    public TasksPresenter(TaskController taskController) {
+        this.taskController = taskController;
     }
 
     public void setupTasksSubscription(TasksType taskType) {
@@ -42,21 +42,38 @@ public class TasksPresenter extends BasePresenter<TasksView> {
         tasksDisposable = getTaskFlowableBasedOnType(taskType)
                 .compose(RxTransformers.applyFlowableIoSchedulers())
                 .subscribe(
-                        //tasks -> getMvpView().displayTasks(tasks),
-                        //throwable -> Timber.d("Error occurred while loading tasks", throwable)
+                        tasks -> {
+                            if(tasks.isEmpty()){
+                                getMvpView().showNoTasksView();
+                            }else {
+                                getMvpView().displayTasks(tasks);
+                            }
+                        },
+                        throwable -> Timber.d("Error occurred while loading tasks", throwable)
                 );
     }
 
-    private Flowable<List<TaskDb>> getTaskFlowableBasedOnType(TasksType tasksType) {
+    private Flowable<List<Task>> getTaskFlowableBasedOnType(TasksType tasksType) {
         switch (tasksType) {
             case TODO:
-                return tasksRepository.getToDoTasks();
+                return taskController.getToDoTasks();
             case DONE:
-                return tasksRepository.getDoneTasks();
+                return taskController.getDoneTasks();
             case FINISHING:
-                return tasksRepository.getTasksWithDueDateBefore(LocalDate.now().plus(FINISHING_TASKS_PERIOD, ChronoUnit.DAYS));
+                return taskController.getTasksWithDueDateBefore(LocalDate.now().plus(FINISHING_TASKS_PERIOD, ChronoUnit.DAYS));
             default:
                 throw new IllegalArgumentException("Unknown task type");
         }
+    }
+
+    public void deleteTask(Task task) {
+        taskController.deleteTask(task)
+                .compose(RxTransformers.applyCompletableIoSchedulers())
+                .subscribe(() -> Timber.d("Task deleted"),
+                        throwable -> Timber.e(throwable, "Error while deleting task"));
+    }
+
+    public void editTask(Task task) {
+        getMvpView().showEditTaskView(task);
     }
 }

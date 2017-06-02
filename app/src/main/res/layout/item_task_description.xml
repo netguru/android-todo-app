@@ -12,11 +12,9 @@
         android:gravity="center_vertical">
 
         <ImageView
-            android:layout_width="@dimen/form_image_width"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_medium"
+            style="@style/FormIconStyle"
             android:src="@drawable/ic_title_white_24dp"
-            android:tint="@color/form_icon_color"/>
+            />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -44,11 +42,9 @@
         android:gravity="center_vertical">
 
         <ImageView
-            android:layout_width="@dimen/form_image_width"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_medium"
+            style="@style/FormIconStyle"
             android:src="@drawable/ic_description_white_24dp"
-            android:tint="@color/form_icon_color"/>
+            />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -73,11 +69,9 @@
         android:gravity="center_vertical">
 
         <ImageView
-            android:layout_width="@dimen/form_image_width"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_medium"
+            style="@style/FormIconStyle"
             android:src="@drawable/ic_access_time_white_24dp"
-            android:tint="@color/form_icon_color"/>
+            />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/due_date_text_input_layout"

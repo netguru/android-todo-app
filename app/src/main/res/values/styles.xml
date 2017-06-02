@@ -12,4 +12,11 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
+    <style name="FormIconStyle">
+        <item name="android:layout_width">@dimen/form_image_width_height</item>
+        <item name="android:layout_height">@dimen/form_image_width_height</item>
+        <item name="android:layout_margin">@dimen/margin_medium</item>
+        <item name="android:tint">@color/form_icon_color</item>
+    </style>
+
 </resources>

@@ -4,24 +4,28 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import co.netguru.todolist.R;
 import co.netguru.todolist.app.App;
-import co.netguru.todolist.data.local.model.TaskDb;
-import co.netguru.todolist.domain.Task;
+import co.netguru.todolist.domain.model.Task;
+import co.netguru.todolist.ui.edittask.EditTaskActivity;
 import co.netguru.todolist.ui.base.BaseMvpFragment;
+import co.netguru.todolist.ui.tasks.adapter.TaskDeleteListener;
+import co.netguru.todolist.ui.tasks.adapter.TaskEditListener;
 import co.netguru.todolist.ui.tasks.adapter.TasksAdapter;
 
-public class TasksFragment extends BaseMvpFragment<TasksPresenter> implements TasksView {
+public class TasksFragment extends BaseMvpFragment<TasksPresenter> implements TasksView, TaskEditListener, TaskDeleteListener {
 
     private static final String TASK_TYPE_ARG = "task_type_arg";
 
-    private final TasksAdapter tasksAdapter = new TasksAdapter();
+    private final TasksAdapter tasksAdapter = new TasksAdapter(this, this);
 
     @BindView(R.id.tasks_recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.no_tasks_text_view) TextView noTasksTextView;
 
     private TasksType tasksType;
 
@@ -58,7 +62,30 @@ public class TasksFragment extends BaseMvpFragment<TasksPresenter> implements Ta
     }
 
     @Override
+    public void onTaskEdit(Task task) {
+        getPresenter().editTask(task);
+    }
+
+    @Override
+    public void onTaskDelete(Task task) {
+        getPresenter().deleteTask(task);
+    }
+
+    @Override
     public void displayTasks(List<Task> tasks) {
+        noTasksTextView.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
         tasksAdapter.showTasks(tasks);
+    }
+
+    @Override
+    public void showNoTasksView() {
+        noTasksTextView.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showEditTaskView(Task task) {
+        EditTaskActivity.start(getContext(),task);
     }
 }

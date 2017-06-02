@@ -9,19 +9,12 @@
     android:layout_marginTop="@dimen/margin_small"
     android:orientation="horizontal">
 
-    <android.support.v7.widget.AppCompatCheckBox
-        android:id="@+id/is_done_checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"/>
-
     <EditText
         android:id="@+id/sub_task_name_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/is_done_checkbox"
+        android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/remove_button"
         android:hint="@string/checklist_item_hint"
         android:imeOptions="actionNext"

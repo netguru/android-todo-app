@@ -1,4 +1,4 @@
-package co.netguru.todolist.ui.addtask;
+package co.netguru.todolist.ui.edittask;
 
 import co.netguru.todolist.common.di.FragmentScope;
 import dagger.Subcomponent;
@@ -7,7 +7,7 @@ import dagger.Subcomponent;
 @Subcomponent
 public interface AddTaskFragmentComponent {
 
-    void inject(AddTaskFragment addTaskFragment);
+    void inject(EditTaskFragment addTaskFragment);
 
-    AddTaskPresenter getPresenter();
+    EditTaskPresenter getPresenter();
 }

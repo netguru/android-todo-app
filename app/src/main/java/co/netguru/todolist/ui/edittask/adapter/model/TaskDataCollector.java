@@ -1,14 +1,10 @@
-package co.netguru.todolist.domain;
-
-import android.support.annotation.Nullable;
+package co.netguru.todolist.ui.edittask.adapter.model;
 
 import org.threeten.bp.LocalDate;
 
-import java.util.List;
+public class TaskDataCollector {
 
-public class Task {
-
-    private int id;
+    private long id;
 
     private String title;
 
@@ -16,30 +12,22 @@ public class Task {
 
     private boolean isDone;
 
-    @Nullable
     private LocalDate dueDate;
 
-    private List<ChecklistItem> checklistItemList;
+    public TaskDataCollector() {
 
-    public Task() {
     }
 
-    public Task(int id, String title, String description,
-                boolean isDone, LocalDate dueDate, List<ChecklistItem> checklistItemList) {
+    public TaskDataCollector(long id, String title, String description, boolean isDone, LocalDate dueDate) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.isDone = isDone;
         this.dueDate = dueDate;
-        this.checklistItemList = checklistItemList;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -66,20 +54,11 @@ public class Task {
         isDone = done;
     }
 
-    @Nullable
     public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(@Nullable LocalDate dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
-    }
-
-    public List<ChecklistItem> getChecklistItemList() {
-        return checklistItemList;
-    }
-
-    public void setChecklistItemList(List<ChecklistItem> checklistItemList) {
-        this.checklistItemList = checklistItemList;
     }
 }

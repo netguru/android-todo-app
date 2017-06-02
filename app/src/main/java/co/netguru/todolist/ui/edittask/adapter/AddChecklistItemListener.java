@@ -1,4 +1,4 @@
-package co.netguru.todolist.ui.addtask.adapter;
+package co.netguru.todolist.ui.edittask.adapter;
 
 public interface AddChecklistItemListener {
 

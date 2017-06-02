@@ -6,15 +6,22 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.netguru.todolist.domain.Task;
+import co.netguru.todolist.domain.model.Task;
 
 public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> {
 
     private final List<Task> tasks = new ArrayList<>();
+    private final TaskEditListener taskEditListener;
+    private final TaskDeleteListener taskDeleteListener;
+
+    public TasksAdapter(TaskEditListener taskEditListener, TaskDeleteListener taskDeleteListener) {
+        this.taskEditListener = taskEditListener;
+        this.taskDeleteListener = taskDeleteListener;
+    }
 
     @Override
     public TaskViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new TaskViewHolder(parent);
+        return new TaskViewHolder(parent, taskEditListener, taskDeleteListener);
     }
 
     @Override
