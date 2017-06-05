@@ -8,7 +8,7 @@ import co.netguru.todolist.data.local.converters.LocalDateConverter;
 import co.netguru.todolist.data.local.model.ChecklistItemDb;
 import co.netguru.todolist.data.local.model.TaskDb;
 
-@Database(version = 8, entities = {TaskDb.class, ChecklistItemDb.class})
+@Database(version = 1, entities = {TaskDb.class, ChecklistItemDb.class})
 @TypeConverters(LocalDateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 
