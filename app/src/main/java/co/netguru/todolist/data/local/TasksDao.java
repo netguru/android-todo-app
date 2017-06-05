@@ -11,7 +11,6 @@ import org.threeten.bp.LocalDate;
 import java.util.List;
 
 import co.netguru.todolist.data.local.model.TaskDb;
-import co.netguru.todolist.domain.model.Task;
 import io.reactivex.Flowable;
 
 @Dao
@@ -21,7 +20,7 @@ public interface TasksDao {
     long insertTask(TaskDb taskDb);
 
     @Update
-    void updateTask(TaskDb taskDb);
+    int updateTask(TaskDb taskDb);
 
     @Query("SELECT * FROM task WHERE is_done = 0")
     Flowable<List<TaskDb>> getToDoTasks();
@@ -29,7 +28,7 @@ public interface TasksDao {
     @Query("SELECT * FROM task WHERE is_done = 1")
     Flowable<List<TaskDb>> getDoneTasks();
 
-    @Query("SELECT * FROM task WHERE due_date < :localDate")
+    @Query("SELECT * FROM task WHERE is_done = 0 AND due_date < :localDate")
     Flowable<List<TaskDb>> getTaskWithDueDateBefore(LocalDate localDate);
 
     @Delete

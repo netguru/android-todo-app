@@ -13,15 +13,17 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> {
     private final List<Task> tasks = new ArrayList<>();
     private final TaskEditListener taskEditListener;
     private final TaskDeleteListener taskDeleteListener;
+    private final TaskDoneListener taskDoneListener;
 
-    public TasksAdapter(TaskEditListener taskEditListener, TaskDeleteListener taskDeleteListener) {
+    public TasksAdapter(TaskEditListener taskEditListener, TaskDeleteListener taskDeleteListener, TaskDoneListener taskDoneListener) {
         this.taskEditListener = taskEditListener;
         this.taskDeleteListener = taskDeleteListener;
+        this.taskDoneListener = taskDoneListener;
     }
 
     @Override
     public TaskViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new TaskViewHolder(parent, taskEditListener, taskDeleteListener);
+        return new TaskViewHolder(parent, taskEditListener, taskDeleteListener, taskDoneListener);
     }
 
     @Override

@@ -25,7 +25,7 @@ public class Task implements Parcelable {
     private final List<ChecklistItem> checklistItemList;
 
     private Task(long id, String title, String description,
-                 boolean isDone, LocalDate dueDate, List<ChecklistItem> checklistItemList) {
+                 boolean isDone, @Nullable LocalDate dueDate, List<ChecklistItem> checklistItemList) {
         this.id = id;
         this.title = title;
         this.description = description;

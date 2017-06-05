@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
-println("TEST")
-println(System.getenv("HOME"))
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
@@ -27,11 +26,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile(test.junit) {
-        exclude module: 'hamcrest-core'
-    }
-    testCompile test.hamcrest
-    testCompile test.mockito
 
     compile libs.appCompat
     compile libs.recyclerView

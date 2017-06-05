@@ -16,6 +16,7 @@ import co.netguru.todolist.domain.model.Task;
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
+import timber.log.Timber;
 
 @Singleton
 public class TasksRepository {
@@ -70,6 +71,14 @@ public class TasksRepository {
                     }
                 }
         );
+    }
+
+    public Completable updateTaskOnly(Task task) {
+        return Completable.fromAction(() -> {
+            TaskDb taskDb = TaskMapper.toTaskDb(task);
+            long updatedRow = appDatabase.tasksDao().updateTask(taskDb);
+            Timber.d("Updated row " + updatedRow);
+        });
     }
 
     public Completable deleteTask(Task task) {

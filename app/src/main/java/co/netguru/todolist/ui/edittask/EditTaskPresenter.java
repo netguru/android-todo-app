@@ -62,7 +62,7 @@ public class EditTaskPresenter extends BasePresenter<EditTaskView> {
 
     private void updateTask(Task task, List<ChecklistItem> checklistItemsToDelete,
                             List<ChecklistItem> checklistItemsToUpdate, List<ChecklistItem> checklistItemsToAdd) {
-        disposables.add(taskController.updateTask(task, checklistItemsToDelete, checklistItemsToUpdate, checklistItemsToAdd)
+        disposables.add(taskController.updateTaskWithChecklist(task, checklistItemsToDelete, checklistItemsToUpdate, checklistItemsToAdd)
                 .compose(RxTransformers.applyCompletableIoSchedulers())
                 .subscribe(
                         getMvpView()::finish,

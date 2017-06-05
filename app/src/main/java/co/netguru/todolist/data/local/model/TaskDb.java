@@ -18,13 +18,13 @@ public class TaskDb {
     private final String description;
 
     @ColumnInfo(name = "is_done")
-    private boolean isDone;
+    private final boolean isDone;
 
     @Nullable
     @ColumnInfo(name = "due_date")
-    private LocalDate dueDate;
+    private final LocalDate dueDate;
 
-    public TaskDb(long id, String title, String description, boolean isDone, LocalDate dueDate) {
+    public TaskDb(long id, String title, String description, boolean isDone, @Nullable LocalDate dueDate) {
         this.id = id;
         this.title = title;
         this.description = description;

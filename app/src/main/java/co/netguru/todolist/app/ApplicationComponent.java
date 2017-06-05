@@ -4,7 +4,6 @@ import javax.inject.Singleton;
 
 import co.netguru.todolist.data.local.LocalDataModule;
 import co.netguru.todolist.ui.edittask.EditTaskFragmentComponent;
-import co.netguru.todolist.ui.main.MainActivityComponent;
 import co.netguru.todolist.ui.tasks.TasksFragmentComponent;
 import dagger.Component;
 
@@ -14,8 +13,6 @@ import dagger.Component;
         LocalDataModule.class
 })
 public interface ApplicationComponent {
-
-    MainActivityComponent mainActivityComponent();
 
     TasksFragmentComponent tasksFragmentComponent();
 

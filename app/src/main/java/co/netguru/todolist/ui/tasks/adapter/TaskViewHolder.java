@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnCheckedChanged;
 import co.netguru.todolist.R;
 import co.netguru.todolist.common.LocalDateFormatterUtil;
 import co.netguru.todolist.domain.model.ChecklistItem;
@@ -22,6 +24,7 @@ public class TaskViewHolder extends BaseViewHolder<Task> implements Toolbar.OnMe
 
     private final TaskEditListener taskEditListener;
     private final TaskDeleteListener taskDeleteListener;
+    private final TaskDoneListener taskDoneListener;
 
     @BindView(R.id.task_toolbar) Toolbar toolbar;
     @BindView(R.id.title_text_view) TextView titleTextView;
@@ -30,13 +33,16 @@ public class TaskViewHolder extends BaseViewHolder<Task> implements Toolbar.OnMe
     @BindView(R.id.due_date_text_view) TextView dueDateTextView;
     @BindView(R.id.checklist_layout) LinearLayout checklistLayout;
     @BindView(R.id.checklist_text_view) TextView checklistTextView;
+    @BindView(R.id.done_checkbox) CheckBox doneCheckbox;
 
     private Task currentTask;
 
-    public TaskViewHolder(ViewGroup parent, TaskEditListener taskEditListener, TaskDeleteListener taskDeleteListener) {
+    public TaskViewHolder(ViewGroup parent, TaskEditListener taskEditListener,
+                          TaskDeleteListener taskDeleteListener, TaskDoneListener taskDoneListener) {
         super(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_task, parent, false));
         this.taskEditListener = taskEditListener;
         this.taskDeleteListener = taskDeleteListener;
+        this.taskDoneListener = taskDoneListener;
         toolbar.inflateMenu(R.menu.task_card_menu);
         toolbar.setOnMenuItemClickListener(this);
     }
@@ -44,6 +50,7 @@ public class TaskViewHolder extends BaseViewHolder<Task> implements Toolbar.OnMe
     @Override
     public void bind(Task item) {
         this.currentTask = item;
+        doneCheckbox.setChecked(item.isDone());
         titleTextView.setText(item.getTitle());
         descriptionTextView.setText(item.getDescription());
         if (item.getDueDate() == null) {
@@ -64,7 +71,7 @@ public class TaskViewHolder extends BaseViewHolder<Task> implements Toolbar.OnMe
     private String getFormattedChecklistItems(List<ChecklistItem> checklistItems) {
         StringBuilder stringBuilder = new StringBuilder();
         for (ChecklistItem checklistItem : checklistItems) {
-            stringBuilder.append("-").append(checklistItem.getName()).append("\n");
+            stringBuilder.append("- ").append(checklistItem.getName()).append("\n");
         }
         return stringBuilder.toString();
     }
@@ -80,6 +87,21 @@ public class TaskViewHolder extends BaseViewHolder<Task> implements Toolbar.OnMe
                 return true;
             default:
                 throw new IllegalArgumentException("Unknown item menu item");
+        }
+    }
+
+    @OnCheckedChanged(R.id.done_checkbox)
+    void onTaskDoneStateChange(boolean isDone) {
+        if (currentTask.isDone() != isDone) {
+            taskDoneListener.onTaskDoneStateChange(
+                    new Task.Builder()
+                            .setId(currentTask.getId())
+                            .setTitle(currentTask.getTitle())
+                            .setDescription(currentTask.getDescription())
+                            .setDueDate(currentTask.getDueDate())
+                            .setIsDone(isDone)
+                            .setChecklistItemList(currentTask.getChecklistItemList())
+                            .build());
         }
     }
 }

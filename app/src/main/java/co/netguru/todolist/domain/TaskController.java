@@ -25,9 +25,13 @@ public class TaskController {
         return tasksRepository.saveNewTask(task);
     }
 
-    public Completable updateTask(Task task, List<ChecklistItem> checklistItemsToDelete,
-                                  List<ChecklistItem> checklistItemsToUpdate, List<ChecklistItem> checklistItemsToAdd) {
-        return tasksRepository.updateTask(task, checklistItemsToDelete,checklistItemsToUpdate,checklistItemsToAdd);
+    public Completable updateTaskWithChecklist(Task task, List<ChecklistItem> checklistItemsToDelete,
+                                               List<ChecklistItem> checklistItemsToUpdate, List<ChecklistItem> checklistItemsToAdd) {
+        return tasksRepository.updateTask(task, checklistItemsToDelete, checklistItemsToUpdate, checklistItemsToAdd);
+    }
+
+    public Completable updateTaskOnly(Task task) {
+        return tasksRepository.updateTaskOnly(task);
     }
 
     public Flowable<List<Task>> getToDoTasks() {

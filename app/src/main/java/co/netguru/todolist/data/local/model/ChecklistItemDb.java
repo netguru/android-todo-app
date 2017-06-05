@@ -19,7 +19,7 @@ import android.arch.persistence.room.PrimaryKey;
 public class ChecklistItemDb {
 
     @PrimaryKey(autoGenerate = true)
-    private long id;
+    private final long id;
 
     @ColumnInfo(name = "task_id")
     private final long taskId;

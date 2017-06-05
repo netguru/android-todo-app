@@ -12,9 +12,9 @@ import java.util.Set;
 
 import co.netguru.todolist.domain.model.ChecklistItem;
 import co.netguru.todolist.domain.model.Task;
+import co.netguru.todolist.ui.base.BaseViewHolder;
 import co.netguru.todolist.ui.edittask.adapter.model.ChecklistDataCollector;
 import co.netguru.todolist.ui.edittask.adapter.model.TaskDataCollector;
-import co.netguru.todolist.ui.base.BaseViewHolder;
 
 public class CheckListAdapter extends RecyclerView.Adapter<BaseViewHolder>
         implements AddChecklistItemListener, GetIsLastObserver, RemoveChecklistItemListener {
@@ -34,7 +34,7 @@ public class CheckListAdapter extends RecyclerView.Adapter<BaseViewHolder>
     private final TaskDataCollector taskDataCollector;
     private final DueDateRequestListener dueDateRequestListener;
 
-    private Set<RecyclerView> attachedRecyclers = new HashSet<>();
+    private final Set<RecyclerView> attachedRecyclers = new HashSet<>();
 
     public CheckListAdapter(DueDateRequestListener dueDateRequestListener) {
         this.dueDateRequestListener = dueDateRequestListener;
@@ -113,10 +113,10 @@ public class CheckListAdapter extends RecyclerView.Adapter<BaseViewHolder>
     public void removeChecklistItemBasedOnLayoutPosition(int layoutPosition) {
         final int checklistItemPosition = layoutPosition - HEADER_ITEMS_COUNT;
         if (checklistDataCollectors.size() > checklistItemPosition) {
-            ChecklistDataCollector removedCheckListDataColector =
+            ChecklistDataCollector removedChecklistDataCollector =
                     checklistDataCollectors.remove(checklistItemPosition);
-            if (removedCheckListDataColector.isIdSet()) {
-                removedChecklistDataCollectorsWithId.add(removedCheckListDataColector);
+            if (removedChecklistDataCollector.isIdSet()) {
+                removedChecklistDataCollectorsWithId.add(removedChecklistDataCollector);
             }
             notifyItemRemoved(layoutPosition);
         }

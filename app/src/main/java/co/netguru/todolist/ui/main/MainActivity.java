@@ -9,15 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import co.netguru.todolist.R;
-import co.netguru.todolist.app.App;
-import co.netguru.todolist.ui.base.BaseMvpActivity;
-import co.netguru.todolist.ui.edittask.EditTaskActivity;
+import co.netguru.todolist.ui.base.BaseActivity;
 import co.netguru.todolist.ui.tasks.TasksFragment;
 import co.netguru.todolist.ui.tasks.TasksType;
 
-public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainView, BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -37,21 +34,6 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
-    }
-
-    @Override
-    public MainPresenter createPresenter() {
-        return App.getAppComponent(this).mainActivityComponent().getPresenter();
-    }
-
-    @OnClick(R.id.fab)
-    void onFabClick() {
-        getPresenter().handleAddTaskClick();
-    }
-
-    @Override
-    public void showAddTaskView() {
-        EditTaskActivity.start(this);
     }
 
     @Override

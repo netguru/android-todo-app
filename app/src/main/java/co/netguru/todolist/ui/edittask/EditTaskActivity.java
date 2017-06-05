@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,24 +41,35 @@ public class EditTaskActivity extends BaseActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupToolbar();
-        Task taskToEdit = getIntent().getParcelableExtra(TASK_TO_EDIT_EXTRA);
-        Fragment fragmentToReplace = taskToEdit == null ? EditTaskFragment.newAddTaskInstance() : EditTaskFragment.newEditTaskInstance(taskToEdit);
+        if (savedInstanceState == null) {
+            Task taskToEdit = getIntent().getParcelableExtra(TASK_TO_EDIT_EXTRA);
+            Fragment fragmentToReplace = taskToEdit == null ? EditTaskFragment.newAddTaskInstance() : EditTaskFragment.newEditTaskInstance(taskToEdit);
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, fragmentToReplace, EditTaskFragment.TAG)
-                .commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, fragmentToReplace, EditTaskFragment.TAG)
+                    .commit();
+        }
     }
 
     private void setupToolbar() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) {
+            supportActionBar.setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add_task_menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 
     @Override

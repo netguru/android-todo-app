@@ -12,7 +12,7 @@ import co.netguru.todolist.domain.TaskController;
 import co.netguru.todolist.domain.model.Task;
 import co.netguru.todolist.ui.base.BasePresenter;
 import io.reactivex.Flowable;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
 import timber.log.Timber;
 
 public class TasksPresenter extends BasePresenter<TasksView> {
@@ -20,15 +20,12 @@ public class TasksPresenter extends BasePresenter<TasksView> {
     private static final int FINISHING_TASKS_PERIOD = 7;
 
     private final TaskController taskController;
-    private TasksType taskType;
-    private Disposable tasksDisposable;
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     public void onDetach() {
         super.onDetach();
-        if (tasksDisposable != null) {
-            tasksDisposable.dispose();
-        }
+        compositeDisposable.dispose();
     }
 
     @Inject
@@ -36,21 +33,24 @@ public class TasksPresenter extends BasePresenter<TasksView> {
         this.taskController = taskController;
     }
 
-    public void setupTasksSubscription(TasksType taskType) {
-        this.taskType = taskType;
+    public void handleAddTaskClick() {
+        getMvpView().showAddTaskView();
+    }
 
-        tasksDisposable = getTaskFlowableBasedOnType(taskType)
-                .compose(RxTransformers.applyFlowableIoSchedulers())
-                .subscribe(
-                        tasks -> {
-                            if(tasks.isEmpty()){
-                                getMvpView().showNoTasksView();
-                            }else {
-                                getMvpView().displayTasks(tasks);
-                            }
-                        },
-                        throwable -> Timber.d("Error occurred while loading tasks", throwable)
-                );
+    public void setupTasksSubscription(TasksType taskType) {
+        compositeDisposable.add(
+                getTaskFlowableBasedOnType(taskType)
+                        .compose(RxTransformers.applyFlowableIoSchedulers())
+                        .subscribe(
+                                tasks -> {
+                                    if (tasks.isEmpty()) {
+                                        getMvpView().showNoTasksView();
+                                    } else {
+                                        getMvpView().displayTasks(tasks);
+                                    }
+                                },
+                                throwable -> Timber.d("Error occurred while loading tasks", throwable)
+                        ));
     }
 
     private Flowable<List<Task>> getTaskFlowableBasedOnType(TasksType tasksType) {
@@ -67,13 +67,27 @@ public class TasksPresenter extends BasePresenter<TasksView> {
     }
 
     public void deleteTask(Task task) {
-        taskController.deleteTask(task)
-                .compose(RxTransformers.applyCompletableIoSchedulers())
-                .subscribe(() -> Timber.d("Task deleted"),
-                        throwable -> Timber.e(throwable, "Error while deleting task"));
+        compositeDisposable.add(
+                taskController.deleteTask(task)
+                        .compose(RxTransformers.applyCompletableIoSchedulers())
+                        .subscribe(() -> getMvpView().showTaskDeletedMessage(task.getTitle()),
+                                throwable -> Timber.e(throwable, "Error while deleting task")));
     }
 
     public void editTask(Task task) {
         getMvpView().showEditTaskView(task);
+    }
+
+    public void updateTaskDoneState(Task task) {
+        compositeDisposable.add(
+                taskController.updateTaskOnly(task)
+                        .compose(RxTransformers.applyCompletableIoSchedulers())
+                        .subscribe(() -> {
+                            if (task.isDone()) {
+                                getMvpView().showTaskMarkedAsDoneMessage(task.getTitle());
+                            } else {
+                                getMvpView().showTaskUnmarkedAsDoneMessage(task.getTitle());
+                            }
+                        }, throwable -> Timber.e(throwable, "Error while deleting task")));
     }
 }
