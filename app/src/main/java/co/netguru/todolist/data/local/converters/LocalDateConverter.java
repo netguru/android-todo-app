@@ -11,7 +11,7 @@ public class LocalDateConverter {
         throw new AssertionError();
     }
 
-    @TypeConverter()
+    @TypeConverter
     public static LocalDate fromLong(@Nullable Long epoch) {
         return epoch == null ? null : LocalDate.ofEpochDay(epoch);
     }
