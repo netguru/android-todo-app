@@ -7,7 +7,11 @@ import org.threeten.bp.LocalDate;
 
 public class LocalDateConverter {
 
-    @TypeConverter
+    private LocalDateConverter() {
+        throw new AssertionError();
+    }
+
+    @TypeConverter()
     public static LocalDate fromLong(@Nullable Long epoch) {
         return epoch == null ? null : LocalDate.ofEpochDay(epoch);
     }
