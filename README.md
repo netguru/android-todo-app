@@ -11,14 +11,14 @@
 
 <!-- Put your project's name -->
 # Android todo app - Room sample project
-
+![alt tag](https://github.com/netguru/android-todo-app/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 ## Synopsis
 <!-- Describe the project in few sentences -->
 Android todo app is a small sample project developed to showcase [Room library](https://developer.android.com/topic/libraries/architecture/room.html).
 It's part of article on our blog :
 <!-- Todo UPDATE THIS PART -->
-- [Part 1 - ToDo](https://www.netguru.co/blog)
-- [Part 2 - ToDo](https://www.netguru.co/blog)
+- [Part 1 - coming soon](https://www.netguru.co/blog)
+- [Part 2 - coming soon](https://www.netguru.co/blog)
 
 ## Development
 
