@@ -17,8 +17,8 @@
 Android todo app is a small sample project developed to showcase [Room library](https://developer.android.com/topic/libraries/architecture/room.html).
 It's part of article on our blog :
 <!-- Todo UPDATE THIS PART -->
-- [Part 1 - coming soon](https://www.netguru.co/codestories/check-out-why-room-is-a-retrofit-for-sqlite-pt.-1)
-- [Part 2 - coming soon](https://www.netguru.co/codestories/check-out-why-room-is-a-retrofit-for-sqlite-pt.-2)
+- [Part 1](https://www.netguru.co/codestories/check-out-why-room-is-a-retrofit-for-sqlite-pt.-1)
+- [Part 2](https://www.netguru.co/codestories/check-out-why-room-is-a-retrofit-for-sqlite-pt.-2)
 
 ## Development
 
